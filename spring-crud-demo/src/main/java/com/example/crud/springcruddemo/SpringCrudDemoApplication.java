@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @SpringBootApplication
 //@Configuration
 //@ComponentScan
@@ -24,9 +26,30 @@ public class SpringCrudDemoApplication {
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
 		return runner -> {
 //			createStudent(studentDAO);
-			readStudents(studentDAO);
+//			readStudents(studentDAO);
+//			queryForStudents(studentDAO);
+			queryForStudentsByLastName(studentDAO);
 		};
 	}
+
+	private void queryForStudentsByLastName(StudentDAO studentDAO) {
+		List<Student> students =studentDAO.findByLastName("Smith");
+
+		for (Student student: students){
+			System.out.println(student);
+		}
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+		// get all students
+		List<Student> students = studentDAO.findAllStudents();
+
+		// display list of students
+		for (Student student: students){
+			System.out.println(student);
+		}
+	}
+
 
 	private void readStudents(StudentDAO studentDAO) {
 		// create student
@@ -54,7 +77,7 @@ public class SpringCrudDemoApplication {
 	private void createStudent(StudentDAO studentDAO) {
 		// create the student object
 		System.out.println("Creating new student");
-		Student student = new Student("John", "Smith", "John@xyz.com");
+		Student student = new Student("Brad", "Perera", "brad@xyz.com");
 //		Student student2 = new Student("Brad", "Cage", "brad@xyz.com");
 //		Student student3 = new Student("William", "Froster", "william@xyz.com");
 
