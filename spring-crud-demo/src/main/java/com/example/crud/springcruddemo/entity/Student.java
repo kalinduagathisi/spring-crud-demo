@@ -1,4 +1,4 @@
-package com.example.crud.springcruddemo;
+package com.example.crud.springcruddemo.entity;
 
 import jakarta.persistence.*;
 
