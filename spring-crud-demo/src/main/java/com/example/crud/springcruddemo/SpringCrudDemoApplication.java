@@ -28,9 +28,37 @@ public class SpringCrudDemoApplication {
 //			createStudent(studentDAO);
 //			readStudents(studentDAO);
 //			queryForStudents(studentDAO);
-			queryForStudentsByLastName(studentDAO);
+//			queryForStudentsByLastName(studentDAO);
+//			updateStudent(studentDAO);
+//			removeStudentById(studentDAO);
+//			removeAllStudents(studentDAO);
 		};
 	}
+
+	private void removeAllStudents(StudentDAO studentDAO) {
+		studentDAO.deleteAll();
+	}
+
+	private void removeStudentById(StudentDAO studentDAO) {
+		// retrive student by id
+		int studentId = 3;
+
+		// delete by id
+		studentDAO.delete(studentId);
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		// retrieve student based on id
+		int studentId = 3;
+		Student maStudent = studentDAO.findStudentByID(studentId);
+
+		// update first name
+		maStudent.setFirstName("Brad");
+
+		studentDAO.update(maStudent);
+		System.out.println("Updated student: "+ maStudent);
+	}
+
 
 	private void queryForStudentsByLastName(StudentDAO studentDAO) {
 		List<Student> students =studentDAO.findByLastName("Smith");
@@ -77,15 +105,15 @@ public class SpringCrudDemoApplication {
 	private void createStudent(StudentDAO studentDAO) {
 		// create the student object
 		System.out.println("Creating new student");
-		Student student = new Student("Brad", "Perera", "brad@xyz.com");
-//		Student student2 = new Student("Brad", "Cage", "brad@xyz.com");
-//		Student student3 = new Student("William", "Froster", "william@xyz.com");
+		Student student = new Student("Brad", "Smith", "brad@xyz.com");
+		Student student2 = new Student("Christon", "Smith", "brad@xyz.com");
+		Student student3 = new Student("William", "Froster", "william@xyz.com");
 
 		// save the student object
 		System.out.println("Saving student..");
 		studentDAO.save(student);
-//		studentDAO.save(student2);
-//		studentDAO.save(student3);
+		studentDAO.save(student2);
+		studentDAO.save(student3);
 
 		// display details of the saved student
 		System.out.println("ID of the saved student: "+ student);

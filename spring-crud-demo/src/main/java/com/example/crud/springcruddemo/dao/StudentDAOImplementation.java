@@ -53,9 +53,25 @@ public class StudentDAOImplementation implements StudentDAO{
     }
 
     @Override
+    @Transactional // as we update the table (or create one, not here actually!)
     public void update(Student student) {
+        entityManager.merge(student); // update
+    }
+
+    @Override
+    @Transactional // we're modifying the db
+    public void delete(Integer id) {
+        // retrieve the student
+        Student student = entityManager.find(Student.class, id);
+
+        // remove the student
+        entityManager.remove(student);
 
     }
 
-
+    @Override
+    @Transactional
+    public int deleteAll() {
+        return entityManager.createQuery("delete from Student").executeUpdate();
+    }
 }
