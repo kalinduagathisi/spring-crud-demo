@@ -4,4 +4,7 @@ import com.example.crud.springcruddemo.entity.Student;
 
 public interface StudentDAO {
     void save(Student student);
+
+     Student findStudentByID(Integer id);
+
 }
